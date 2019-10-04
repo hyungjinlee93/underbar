@@ -108,6 +108,20 @@
 
   // Produce a duplicate-free version of the array.
   _.uniq = function(array, isSorted, iterator) {
+    let uniqueArray = [];
+    uniqueArray.push(array[0]);
+    for(let i = 1; i < array.length; i++){
+      let noContain = true;
+      for(let j = 0; j < uniqueArray.length; j++){
+        if(uniqueArray[j] === array[i]){
+          noContain = false;
+        }
+      }
+      if(noContain === true){
+        uniqueArray.push(array[i]);
+      }
+    }
+    return uniqueArray;
   };
 
 
