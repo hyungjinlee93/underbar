@@ -222,7 +222,7 @@
       coll = collection.slice();
     }
     return _.reduce(coll, function(wasFound, item) {
-      if (wasFound) {
+      if(wasFound) {
         return true;
       }
       return item === target;
@@ -233,13 +233,12 @@
   // Determine whether all of the elements match a truth test.
   _.every = function(collection, iterator) {
     // TIP: Try re-using reduce() here.
+
+    if(iterator === undefined){
+      iterator = _.identity;
+    }
     for(let i = 0; i < collection.length; i++){
-      if(iterator === undefined){
-        if(!collection[i]){
-          return false;
-        }
-      }
-      else if(!iterator(collection[i])){
+      if(!iterator(collection[i])){
         return false;
       }
     }
@@ -250,6 +249,15 @@
   // provided, provide a default one
   _.some = function(collection, iterator) {
     // TIP: There's a very clever way to re-use every() here.
+    if(iterator === undefined){
+      iterator = _.identity;
+    }
+    for(let i = 0; i < collection.length; i++){
+      if(iterator(collection[i])){
+        return true;
+      }
+    }
+    return false;
   };
 
 
