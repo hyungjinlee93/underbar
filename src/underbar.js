@@ -215,7 +215,13 @@
   _.contains = function(collection, target) {
     // TIP: Many iteration problems can be most easily expressed in
     // terms of reduce(). Here's a freebie to demonstrate!
-    return _.reduce(collection, function(wasFound, item) {
+    let coll = [];
+    if(!Array.isArray(collection)){
+      coll = Object.values(collection);
+    } else {
+      coll = collection.slice();
+    }
+    return _.reduce(coll, function(wasFound, item) {
       if (wasFound) {
         return true;
       }
