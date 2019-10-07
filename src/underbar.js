@@ -343,15 +343,12 @@
   // instead if possible.
 
   _.memoize = function(func) {
-    // var cache = {};
-    // var address = '' + arguments;
-    // if(!cache.hasOwnProperty(address)){
-    //   cache[address] = func(arguments);
-    // }
-    // return cache[address];
-
     var memoize = function() {
-      var address = '' + Object.values(arguments);
+      if(Object.keys(arguments).length === 1 && Array.isArray(Object.values(arguments)[0])){
+        var address = 'array'+Object.values(arguments);
+      } else {
+        var address = '' + Object.values(arguments);
+      }
       if (!memory.hasOwnProperty(address)){
         memory[address] = func.apply(null, arguments);
       }
