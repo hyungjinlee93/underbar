@@ -341,7 +341,25 @@
   // _.memoize should return a function that, when called, will check if it has
   // already computed the result for the given argument and return that value
   // instead if possible.
+
   _.memoize = function(func) {
+    // var cache = {};
+    // var address = '' + arguments;
+    // if(!cache.hasOwnProperty(address)){
+    //   cache[address] = func(arguments);
+    // }
+    // return cache[address];
+
+    var memoize = function() {
+      var address = '' + Object.values(arguments);
+      if (!memory.hasOwnProperty(address)){
+        memory[address] = func.apply(null, arguments);
+      }
+      return memory[address];
+    };
+    var memory = {};
+    return memoize;
+
   };
 
   // Delays a function for the given number of milliseconds, and then calls
